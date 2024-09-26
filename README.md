@@ -255,3 +255,7 @@ To watch ``geoserver.log`` of a running container:
 ```shell
 docker exec -it {CONTAINER_ID} tail -f /opt/geoserver_data/logs/geoserver.log
 ```
+### for adding osm map add import_osm.sh to 
+```shell
+ENTRYPOINT ["bash", "/opt/startup.sh"]
+```

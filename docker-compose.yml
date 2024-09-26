@@ -1,0 +1,44 @@
+services:
+  geoserver:
+    build:
+      context: .
+      args:
+        - GEOSERVER_VERSION=2.25.3
+        - CORS_ENABLED=true
+        - CORS_ALLOWED_METHODS=GET,POST,PUT,HEAD,OPTIONS
+    ports:
+      - "8888:8080"
+    environment:
+      - INSTALL_EXTENSIONS=true
+      - STABLE_EXTENSIONS=wps,csw ,geopkg-output, excel, geofence-server, geofence, authkey, querylayer, importer, control-flow, monitor, css, pregeneralized, ysld, grib, sldservice, params-extractor, xslt
+      - EXTRA_JAVA_OPTS=-Xms1G -Xmx2G
+      - POSTGRES_JNDI_ENABLED=true
+      - POSTGRES_HOST=postgis
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=geoserver
+      - POSTGRES_USERNAME=geoserver
+      - POSTGRES_PASSWORD=geoserver
+      - POSTGRES_JNDI_RESOURCE_NAME=jdbc/postgres
+    volumes:
+      - /opt/docker/geoserver_data:/opt/geoserver_data:Z
+    healthcheck:
+      test: curl --fail "http://localhost:8080/geoserver/web/wicket/resource/org.geoserver.web.GeoServerBasePage/img/logo.png" || exit 1
+      interval: 1m
+      retries: 3
+      timeout: 20s
+  postgis:
+    image: postgis/postgis:16-3.4-alpine@sha256:111d581877175a8dd0b580d4cfe2c1d8334015ed27eff585d48ec475955329bd
+    ports:
+      - "5555:5432"
+    environment:
+      POSTGRES_USER: geoserver
+      POSTGRES_PASSWORD: geoserver
+    volumes:
+      - /opt/docker/pg_data:/var/lib/postgresql/data:Z
+    healthcheck:
+      test: pg_isready -U geoserver -h localhost -t 5 || exit 1
+      interval: 10s
+      retries: 5
+      timeout: 10s
+
+

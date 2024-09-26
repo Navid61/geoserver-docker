@@ -1,4 +1,4 @@
-FROM tomcat:9.0.93-jdk11-temurin-jammy@sha256:d0d4c5344b8138363236e17071facb1ef13099999164d7f55853aa95010fe4f8
+FROM tomcat:9.0.95-jdk17-temurin-jammy@sha256:a9088b3c113646d852cc5530bcac176f59b54637c7946ae18f95b59d7bcbc8a7
 LABEL vendor="osgeo.org"
 
 # Build arguments
@@ -12,7 +12,7 @@ ARG CORS_ALLOW_CREDENTIALS=false
 ARG CORS_ENABLED=false
 ARG GS_BUILD=release
 ARG GS_DATA_PATH=./geoserver_data/
-ARG GS_VERSION=2.25.2
+ARG GS_VERSION=2.25.3
 ARG STABLE_PLUGIN_URL=https://downloads.sourceforge.net/project/geoserver/GeoServer/${GS_VERSION}/extensions
 ARG WAR_ZIP_URL=https://downloads.sourceforge.net/project/geoserver/GeoServer/${GS_VERSION}/geoserver-${GS_VERSION}-war.zip
 
