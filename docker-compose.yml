@@ -10,7 +10,7 @@ services:
       - "8888:8080"
     environment:
       - INSTALL_EXTENSIONS=true
-      - STABLE_EXTENSIONS=wps,csw ,geopkg-output, excel, geofence-server, geofence, authkey, querylayer, importer, control-flow, monitor, css, pregeneralized, ysld, grib, sldservice, params-extractor, xslt
+      - STABLE_EXTENSIONS=wps,csw ,geopkg-output, excel, geofence-server, authkey, querylayer, importer, control-flow, monitor, css, pregeneralized, ysld, grib, sldservice, params-extractor, xslt
       - EXTRA_JAVA_OPTS=-Xms1G -Xmx2G
       - POSTGRES_JNDI_ENABLED=true
       - POSTGRES_HOST=postgis
